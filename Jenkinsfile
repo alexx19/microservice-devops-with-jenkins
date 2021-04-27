@@ -1,12 +1,11 @@
 pipeline {
-    agent none
+    agent any
+    tools {
+        maven 'Maven 3.8.1'
+        jdk 'jdk11'
+    }
     stages {
         stage('Maven Build') {
-            agent {
-                docker {
-                  image 'openjdk:11-jre-slim'
-                }
-              }
               steps {
                 sh 'mvn clean install'
               }
