@@ -4,7 +4,7 @@ pipeline {
         stage('Maven Build') {
               steps {
                 mvn -v
-                mvn clean install dependency:resolve-plugins dependency:go-offline -Dsurefire.useSystemClassLoader=false
+                mvn clean install
               }
         }
     }
