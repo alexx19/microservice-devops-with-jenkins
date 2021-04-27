@@ -1,13 +1,10 @@
 pipeline {
-    agent any
-    tools {
-        maven 'Maven 3.8.1'
-        jdk 'jdk11'
-    }
+    agent none
     stages {
         stage('Maven Build') {
               steps {
-                sh 'mvn clean install'
+                sh 'mvn clean install dependency:resolve-plugins dependency:go-offline -Dsurefire.useSystemClassLoader=false'
+                sh 'docker build -t microservice-demo .'
               }
         }
     }
