@@ -2,13 +2,11 @@ pipeline {
     agent { dockerfile true }
     environment{
         PATH = "/var/lib/jenkins/apache-maven-3.8.1/bin:$PATH"
-        registry = "docker_hub_account/repository_name"
-            registryCredential = 'dockerhub'
     }
     stages {
         stage('Login Docker') {
             steps {
-                sh 'docker login --username=$DOCKER_HUB_LOGIN_USR --password=$DOCKER_HUB_LOGIN_PSW'
+                sh 'docker login -u=$DOCKER_HUB_LOGIN_USR -p=$DOCKER_HUB_LOGIN_PSW'
             }
         }
         stage('Maven Build') {
