@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { dockerfile true }
     environment{
         PATH = "/var/lib/jenkins/apache-maven-3.8.1/bin:$PATH"
     }
