@@ -14,7 +14,7 @@ pipeline {
                 sh 'env'
                 sh 'mvn -v'
                 sh 'mvn clean install dependency:resolve-plugins dependency:go-offline -Dsurefire.useSystemClassLoader=false'
-                sh 'docker build -t microservice-demo:${env.BUILD_ID} .'
+                sh 'docker build -t microservice-demo/${env.BUILD_ID} .'
               }
         }
     }
