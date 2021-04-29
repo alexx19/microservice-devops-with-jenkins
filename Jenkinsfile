@@ -10,16 +10,18 @@ pipeline {
             }
         }
         stage('Building jar...') {
-              steps {
+            agent any
+            steps {
                 sh 'mvn clean install dependency:resolve-plugins dependency:go-offline -Dsurefire.useSystemClassLoader=false'
-                sh 'docker build -t microservice-demo:2021 .'
+                sh 'docker build -t shanem/spring-petclinic:latest .'
               }
         }
         stage('Docker run...') {
-              steps {
-                sh 'docker run -d --name RexTestApp -p 8081:8081 microservice-demo:2021'
-                sh 'sleep 90'
-              }
+            agent any
+            steps {
+               sh 'docker run -p 8081:8080 shanem/spring-petclinic'
+               sh 'sleep 90'
+            }
         }
     }
 }
