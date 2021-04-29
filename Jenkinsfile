@@ -9,12 +9,13 @@ pipeline {
                 sh 'docker login -u=$DOCKER_HUB_LOGIN_USR -p=$DOCKER_HUB_LOGIN_PSW'
             }
         }
-        stage('Maven Build') {
+        stage('Building jar...') {
               steps {
                 sh 'env'
                 sh 'mvn -v'
                 sh 'mvn clean install dependency:resolve-plugins dependency:go-offline -Dsurefire.useSystemClassLoader=false'
                 sh 'docker build -t microservice-demo/${env.BUILD_ID} .'
+                sh 'sleep 90'
               }
         }
     }
