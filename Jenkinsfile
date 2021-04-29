@@ -12,12 +12,12 @@ pipeline {
         stage('Building jar...') {
               steps {
                 sh 'mvn clean install dependency:resolve-plugins dependency:go-offline -Dsurefire.useSystemClassLoader=false'
-                sh 'docker build -t microservice-demo/${env.BUILD_ID} .'
+                sh 'docker build -t microservice-demo:2021 .'
               }
         }
         stage('Docker run...') {
               steps {
-                sh 'docker run -p 8081:8081 microservice-demo/${env.BUILD_ID}'
+                sh 'docker run -d --name RexTestApp -p 8081:8081 microservice-demo:2021'
                 sh 'sleep 90'
               }
         }
