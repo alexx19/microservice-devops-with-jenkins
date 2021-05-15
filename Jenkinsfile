@@ -19,7 +19,7 @@ pipeline {
         stage('Docker run...') {
             agent any
             steps {
-               sh 'docker run -p 8081:8080 shanem/spring-petclinic'
+               sh 'docker run -p 8081:8081 shanem/spring-petclinic'
                sh 'sleep 90'
             }
         }
